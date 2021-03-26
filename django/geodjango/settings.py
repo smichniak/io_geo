@@ -100,6 +100,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Ajax request can easily access CSRF token
+CSRF_USE_SESSIONS = True
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 

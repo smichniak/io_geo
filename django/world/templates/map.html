@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
 </head>
 
 <body>
 
+{% csrf_token %}
+<button type="button" onclick="send_data()">Send region</button>
+<button type="button" onclick="clear_regions()">Clear regions</button>
 <div id="map"></div>
 
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.js"></script>
