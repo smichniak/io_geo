@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
@@ -14,10 +15,42 @@
 
 <body>
 
-{% csrf_token %}
-<button type="button" onclick="send_data()">Send region</button>
-<button type="button" onclick="clear_regions()">Clear regions</button>
-<div id="map"></div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Mały Geograf</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>    
+      </ul>
+    </div>  
+</nav>
+
+
+
+<div class="d-flex h-100">
+  <div class="flex-grow-0">
+    <div class="btn-group-vertical">
+      {% csrf_token %}
+      <button type="button" class="btn btn-primary" onclick="send_data()">Send region</button>
+      <button type="button" class="btn btn-primary" onclick="clear_regions()">Clear regions</button>
+    </div>
+  </div>
+  <div class="flex-grow-1 flex-fill h-100">
+      <div id="map"></div>
+  </div>
+</div>
+   
+
 
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>

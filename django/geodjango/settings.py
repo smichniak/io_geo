@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '9gy88p9us673k!1$@y@n9dm3o#m(ls-m+-h#4&zm5i^c$8i%p0'
 
-SPATIALITE_LIBRARY_PATH = '/usr/local/lib/mod_spatialite.dylib'
+SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
