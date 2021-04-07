@@ -1,0 +1,10 @@
+
+.DS_Store
+
+django/geodjango/__pycache__/
+
+django/world/__pycache__/
+
+*.pyc
+
+.idea/
