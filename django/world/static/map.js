@@ -24,6 +24,7 @@ function send_data() {
     var json = JSON.stringify(featureGroup.toGeoJSON());
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    $('#coordinatesModal').modal('show');
     $.ajax({
         type: "POST",
         url: "/map/draw_data",
@@ -36,7 +37,7 @@ function send_data() {
         mode: 'same-origin',
         success: function (data) {
             // console.log(json);
-            $("body").append(data + "<br>"); // TODO Redirect to some other site / download file
+            $("#modalCBody").html(data) // TODO Redirect to some other site / download file
         }
     });
 }
