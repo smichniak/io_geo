@@ -66,6 +66,7 @@ def get_levels(data_array, smooth_colouring):
     return list(range(0, top + 500, step))
 
 
+# E1/W1, N1/S1, E2/W2, N2/S2, 0/1 - steps/smooth
 def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring):
     os.system('eio clip -o my_DEM.tif --bounds '
               + str(longitude1) + ' ' + str(latitude1) + ' '
@@ -93,4 +94,4 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
     plt.savefig('hypso_map.png')
 
 
-gen_hypso_map(-122.6, 41.15, -121.9, 41.6, 0)
+
