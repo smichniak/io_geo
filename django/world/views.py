@@ -8,7 +8,7 @@ class MarkersMapView(TemplateView):
     template_name = "map.html"
 
 
-def draw_data(request):
+def display_coordinates(request):
     if not request.is_ajax():
         # TODO Error?
         return HttpResponse('Wrong request')
@@ -19,5 +19,9 @@ def draw_data(request):
     elif len(json_data['features']) >= 2:  # TODO Forbid this situation in the user interface
         return HttpResponse('Select only one region')
     else:
-        # TODO Call some coloring function
         return HttpResponse(json_data['features'][0]['geometry']['coordinates'])
+
+
+class HypsometricMapView(TemplateView):
+    """Hypsometric map view."""
+    template_name = "hypsometric_map.html"
