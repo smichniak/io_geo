@@ -59,8 +59,7 @@ def get_cmap():
 
 
 def get_levels(data_array, smooth_colouring):
-    max_ = np.where(data_array == data_array.max())
-    top = int(data_array[max_])
+    top = int(data_array.max())
     step = 250
     if smooth_colouring:
         step = 50

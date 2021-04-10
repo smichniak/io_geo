@@ -17,3 +17,5 @@ def parse_coordinates(request):
 
     coordinates = json_data['features'][0]['geometry']['coordinates'][0]
     gen_hypso_map(coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1], 0)
+
+    return HttpResponse(':)')
