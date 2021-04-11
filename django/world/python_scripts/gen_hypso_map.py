@@ -46,11 +46,11 @@ def get_cmap():
     # set color map
     # combine 'terrain' matplotlib color map with 'Greens' and 'hot'
     terrain = plt.get_cmap('terrain')
-    greens = plt.get_cmap('PiYG')
+    # greens = plt.get_cmap('PiYG')
     hot = plt.get_cmap('hot')
 
     terrain = terrain(np.linspace(0, 1, 256))
-    greens = greens(np.linspace(0, 1, 256))
+    # greens = greens(np.linspace(0, 1, 256))
     hot = hot(np.linspace(0, 1, 256))
 
     # terrain[:64, :] = greens[128:][::2]
