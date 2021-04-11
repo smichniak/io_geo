@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
+from .models import HypsometricImages
 import json
 
 
@@ -22,6 +24,9 @@ def display_coordinates(request):
         return HttpResponse(json_data['features'][0]['geometry']['coordinates'])
 
 
-class HypsometricMapView(TemplateView):
-    """Hypsometric map view."""
+class HypsometricMapView(DetailView):
+    model = HypsometricImages
+    queryset = HypsometricImages.objects.all()
+    context_object_name = 'hypso_map'
+
     template_name = "hypsometric_map.html"

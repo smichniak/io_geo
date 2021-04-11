@@ -48,7 +48,7 @@ function display_hypsometric() {
 
     $.ajax({
         type: "POST",
-        url: "/map/parse_coordinates",
+        url: "/map/parse_coordinates_hypsometric",
         beforeSend: function (request) {
             request.setRequestHeader("X-CSRFToken", csrftoken);
             request.setRequestHeader("Content-type", "application/json");
@@ -58,6 +58,27 @@ function display_hypsometric() {
         mode: 'same-origin',
         success: function (data) {
             window.location.href = "/map/display_hypsometric";
+        }
+    });
+}
+
+function display_3D() {
+    var json = JSON.stringify(featureGroup.toGeoJSON());
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    $.ajax({
+        type: "POST",
+        url: "/map/parse_coordinates_3D",
+        beforeSend: function (request) {
+            request.setRequestHeader("X-CSRFToken", csrftoken);
+            request.setRequestHeader("Content-type", "application/json");
+        },
+        data: json,
+        dataType: "text",
+        mode: 'same-origin',
+        success: function (data) {
+            // This needs to be done yet.
+            // window.location.href = "/map/display_3D";
         }
     });
 }

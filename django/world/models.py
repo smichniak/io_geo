@@ -7,3 +7,7 @@ class Marker(models.Model):
 
     name = models.CharField(max_length=255)
     location = PointField()
+
+
+class HypsometricImages(models.Model):
+    image = models.ImageField(upload_to='uploaded_images')
