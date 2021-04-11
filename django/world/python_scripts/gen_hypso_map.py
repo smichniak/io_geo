@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
+import uuid
 
 from matplotlib.colors import ListedColormap
 from osgeo import gdal
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import tempfile
+from ..models import HypsometricImages
 
 
 def set_title(longitude1, latitude1, longitude2, latitude2):
@@ -50,7 +53,7 @@ def get_cmap():
     greens = greens(np.linspace(0, 1, 256))
     hot = hot(np.linspace(0, 1, 256))
 
-    #terrain[:64, :] = greens[128:][::2]
+    # terrain[:64, :] = greens[128:][::2]
     terrain[208:] = hot[58:154][::2][::-1]
 
     newcmap = ListedColormap(terrain)
@@ -68,11 +71,16 @@ def get_levels(data_array, smooth_colouring):
 
 # E1/W1, N1/S1, E2/W2, N2/S2, 0/1 - steps/smooth
 def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring):
-    os.system('eio clip -o my_DEM.tif --bounds '
+    filename = tempfile.NamedTemporaryFile(suffix='.tif')
+    unique_name = str(uuid.uuid4())
+    hypso_map = 'media/uploaded_images/' + unique_name + '.png'
+    hypso_map_database_url = 'uploaded_images/' + unique_name + '.png'
+
+    os.system('eio clip -o ' + filename.name + ' --bounds '
               + str(longitude1) + ' ' + str(latitude1) + ' '
               + str(longitude2) + ' ' + str(latitude2))
-    filename = "my_DEM.tif"
-    gdal_data = gdal.Open(filename)
+
+    gdal_data = gdal.Open(filename.name)
     gdal_band = gdal_data.GetRasterBand(1)
     nodataval = gdal_band.GetNoDataValue()
 
@@ -91,4 +99,10 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
     plt.title(set_title(longitude1, latitude1, longitude2, latitude2))
     plt.colorbar()
     plt.gca().set_aspect('equal', adjustable='box')
-    plt.savefig('hypso_map.png')
+    plt.savefig(hypso_map)
+
+    saved_image = HypsometricImages.objects.create(image=hypso_map_database_url)
+
+    filename.close()
+
+    return saved_image.id

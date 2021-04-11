@@ -10,4 +10,9 @@ class Marker(models.Model):
 
 
 class HypsometricImages(models.Model):
-    image = models.ImageField(upload_to='uploaded_images')
+    image = models.ImageField(blank=False, null=False, upload_to='uploaded_images')
+
+    class Meta:
+        verbose_name_plural = "HypsometricImages"
+
+

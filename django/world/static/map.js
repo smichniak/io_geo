@@ -57,7 +57,7 @@ function display_hypsometric() {
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
-            window.location.href = "/map/display_hypsometric";
+            window.location.href = "/map/display_hypsometric/" + data;
         }
     });
 }
