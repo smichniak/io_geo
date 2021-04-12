@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>World Map</title>
+    <title>Mapa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
@@ -36,19 +36,9 @@
 
 <div class="d-flex" style="height: 92% !important;">
   <div class="flex-grow-0">
-    <div class="col-12 m-2">
-      <label for="colorpicker">Wybierz kolor:</label>
-      <br>
-      <input type="color" id="colorpicker" value="#0000ff">
-    </div>
-    <div class="col-12 m-2">
-      <label for="continuous">Kolorowanie ciągłe:</label>
-    
-      <input type="checkbox" id="continuous"> 
-    </div>
-    <div class="col-12 m-2">
+    <div class="m-2 btn-group-vertical">
         <button type="button" class="btn btn-primary" onclick="display_hypsometric()">Mapa hipsometryczna</button>
-        <button type="button" class="btn btn-primary" onclick="display_3D()">Mapa 3D</button>
+        <button type="button" class="btn btn-success" onclick="display_3D()">Mapa 3D</button>
     </div>
   </div>
   <div class="flex-grow-1 flex-fill">

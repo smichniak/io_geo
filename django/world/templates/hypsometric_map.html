@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Mapa hipsometryczna</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
-    <a href="{{ hypso_map.image.url }}"><button class="btn btn-outline-warning mr-3">Pobierz mapę</button></a>
-    <br>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-between align-items-center" style="height: 8%; min-height: 50px;">
+        <a href="{{ hypso_map.image.url }}" download><button class="btn btn-outline-primary mr-3">Pobierz mapę</button></a>
+    </nav>
     <img src="{{ hypso_map.image.url }}" class="img-fluid" alt="Responsive image">
 </body>
 </html>
