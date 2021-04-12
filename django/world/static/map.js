@@ -57,7 +57,14 @@ function display_hypsometric() {
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
-            window.location.href = "/map/display_hypsometric/" + data;
+            if (data !== "No region selected") {
+                window.location.href = "/map/display_hypsometric/" + data;
+            }
+            else {
+                $('#coordinatesModal').modal('show');
+                $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
+                $(".modal-title").html("Ostrzeżenie");
+            }
         }
     });
 }
