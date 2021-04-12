@@ -59,13 +59,17 @@ function display_hypsometric() {
         mode: 'same-origin',
         success: function (data) {
             $('#waitModal').modal('hide');
-            if (data !== "No region selected") {
-                window.location.href = "/map/display_hypsometric/" + data;
-            }
-            else {
-                $('#coordinatesModal').modal('show');
-                $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
-                $(".modal-title").html("Ostrzeżenie");
+
+            if (data === "No region selected") {
+                    $('#coordinatesModal').modal('show');
+                    $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
+                    $(".modal-title").html("Ostrzeżenie");
+            } else if (data === "Select only one region") {
+                    $('#coordinatesModal').modal('show');
+                    $("#modalCBody").html("Zaznacz tylko jeden obszar.");
+                    $(".modal-title").html("Ostrzeżenie");
+            } else {
+                    window.location.href = "/map/display_hypsometric/" + data;
             }
         }
     });

@@ -1,19 +1,13 @@
-import json
-
 from django.http import HttpResponse
+from .parse_coordinates_hypsometric import check_valid_request
+
 
 def parse_coordinates_3D(request):
-    if not request.is_ajax():
-        # TODO Error?
-        return HttpResponse('Wrong request')
+    request_result, valid = check_valid_request(request)
+    if not valid:
+        return request_result
 
-    json_data = json.loads(str(request.body)[2:-1])
-    if not json_data['features']:
-        return HttpResponse('No region selected')
-    elif len(json_data['features']) >= 2:  # TODO Forbid this situation in the user interface
-        return HttpResponse('Select only one region')
-
-    coordinates = json_data['features'][0]['geometry']['coordinates'][0]
+    coordinates = request_result['features'][0]['geometry']['coordinates'][0]
 
     # TODO 3D display needs to be done yet.
 

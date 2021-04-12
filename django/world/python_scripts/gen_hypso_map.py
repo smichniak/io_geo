@@ -9,35 +9,45 @@ import matplotlib.pyplot as plt
 import tempfile
 from ..models import HypsometricImages
 
+from matplotlib import use
+use('Agg')  # Fixes crashes on macOS
 
-def set_title(longitude1, latitude1, longitude2, latitude2):
-    title = 'Hypsometric map of ['
-    title += str(abs(latitude1))
-    if latitude1 >= 0.:
-        title += 'N '
+
+# Decimal coordinates up to 5 decimal places have accuracy of ~ 1 meter, that's enough
+def round_coordinates(coordinate: float) -> float:
+    ROUNDING_DIGITS = 5
+    return round(coordinate, ROUNDING_DIGITS)
+
+
+def get_lat_symbol(latitude: float) -> str:
+    if latitude >= 0:
+        return 'N'
     else:
-        title += 'S '
+        return 'S'
+
+
+def get_long_symbol(longitude1: float) -> str:
+    if longitude1 >= 0:
+        return 'E'
+    else:
+        return 'W'
+
+
+def set_title(title: str, longitude1: float, latitude1: float, longitude2: float, latitude2: float) -> str:
+    longitude1, latitude1, longitude2, latitude2 = map(round_coordinates,
+                                                       [longitude1, latitude1, longitude2, latitude2])
+
+    title += str(abs(latitude1))
+    title += get_lat_symbol(latitude1) + ' '
 
     title += str(abs(longitude1))
-
-    if longitude1 >= 0.:
-        title += 'E, '
-    else:
-        title += 'W, '
+    title += get_long_symbol(longitude1) + ', '
 
     title += str(abs(latitude2))
-
-    if latitude2 >= 0.:
-        title += 'N '
-    else:
-        title += 'S '
+    title += get_lat_symbol(latitude2) + ' '
 
     title += str(abs(longitude2))
-
-    if longitude2 >= 0.:
-        title += 'E]'
-    else:
-        title += 'W]'
+    title += get_long_symbol(longitude2) + ']'
 
     return title
 
@@ -96,7 +106,8 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
     plt.axis('off')
     plt.contourf(data_array, cmap=get_cmap(), levels=get_levels(data_array, smooth_colouring))
 
-    plt.title(set_title(longitude1, latitude1, longitude2, latitude2))
+    title_start = 'Hypsometric map of ['
+    plt.title(set_title(title_start, longitude1, latitude1, longitude2, latitude2))
     plt.colorbar()
     plt.gca().set_aspect('equal', adjustable='box')
     plt.savefig(hypso_map)
