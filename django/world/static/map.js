@@ -46,6 +46,7 @@ function display_hypsometric() {
     var json = JSON.stringify(featureGroup.toGeoJSON());
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    $('#waitModal').modal('show');
     $.ajax({
         type: "POST",
         url: "/map/parse_coordinates_hypsometric",
@@ -57,16 +58,18 @@ function display_hypsometric() {
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
+            $('#waitModal').modal('hide');
+
             if (data === "No region selected") {
-                $('#coordinatesModal').modal('show');
-                $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
-                $(".modal-title").html("Ostrzeżenie");
+                    $('#coordinatesModal').modal('show');
+                    $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
+                    $(".modal-title").html("Ostrzeżenie");
             } else if (data === "Select only one region") {
-                $('#coordinatesModal').modal('show');
-                $("#modalCBody").html("Zaznacz tylko jeden obszar.");
-                $(".modal-title").html("Ostrzeżenie");
+                    $('#coordinatesModal').modal('show');
+                    $("#modalCBody").html("Zaznacz tylko jeden obszar.");
+                    $(".modal-title").html("Ostrzeżenie");
             } else {
-                window.location.href = "/map/display_hypsometric/" + data;
+                    window.location.href = "/map/display_hypsometric/" + data;
             }
         }
     });
