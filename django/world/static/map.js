@@ -46,6 +46,7 @@ function display_hypsometric() {
     var json = JSON.stringify(featureGroup.toGeoJSON());
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    $('#waitModal').modal('show');
     $.ajax({
         type: "POST",
         url: "/map/parse_coordinates_hypsometric",
@@ -57,6 +58,7 @@ function display_hypsometric() {
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
+            $('#waitModal').modal('hide');
             if (data !== "No region selected") {
                 window.location.href = "/map/display_hypsometric/" + data;
             }
