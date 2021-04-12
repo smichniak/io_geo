@@ -8,3 +8,7 @@ django/world/__pycache__/
 *.pyc
 
 .idea/
+
+django/media/
+
+*.sqlite3
