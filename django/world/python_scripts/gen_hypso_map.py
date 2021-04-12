@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 import tempfile
 from ..models import HypsometricImages
 
+from matplotlib import use
+use('Agg')  # Fixes crashes on macOS
+
 
 # Decimal coordinates up to 5 decimal places have accuracy of ~ 1 meter, that's enough
 def round_coordinates(coordinate: float) -> float:

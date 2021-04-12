@@ -2,7 +2,9 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from .models import HypsometricImages
-import json
+
+from .python_scripts.parse_coordinates_hypsometric import check_valid_request
+from .python_scripts.gen_hypso_map import set_title
 
 
 class MarkersMapView(TemplateView):
@@ -11,17 +13,13 @@ class MarkersMapView(TemplateView):
 
 
 def display_coordinates(request):
-    if not request.is_ajax():
-        # TODO Error?
-        return HttpResponse('Wrong request')
+    request_result, valid = check_valid_request(request)
+    if not valid:
+        return request_result
 
-    json_data = json.loads(str(request.body)[2:-1])
-    if not json_data['features']:
-        return HttpResponse('No region selected')
-    elif len(json_data['features']) >= 2:  # TODO Forbid this situation in the user interface
-        return HttpResponse('Select only one region')
-    else:
-        return HttpResponse(json_data['features'][0]['geometry']['coordinates'])
+    coordinates = request_result['features'][0]['geometry']['coordinates'][0]
+    long1, lat1, long2, lat2 = coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1]
+    return HttpResponse(set_title('', long1, lat1, long2, lat2)[:-1])  # [:-1] to remove the last char ']'
 
 
 class HypsometricMapView(DetailView):

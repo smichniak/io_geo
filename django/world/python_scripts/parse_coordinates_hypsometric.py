@@ -14,7 +14,7 @@ def check_valid_request(request):
     json_data = json.loads(str(request.body)[2:-1])
     if not json_data['features']:
         return HttpResponse('No region selected'), False
-    elif len(json_data['features']) >= 2:  # TODO Forbid this situation in the user interface
+    elif len(json_data['features']) >= 2:
         return HttpResponse('Select only one region'), False
 
     return json_data, True
