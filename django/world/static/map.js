@@ -38,7 +38,13 @@ function send_data() {
         mode: 'same-origin',
         success: function (data) {
             // console.log(json);
-            $("#modalCBody").html(data)
+            if (data === "No region selected") {
+                $("#modalCBody").html("Nie wybrano żadnego obszaru");
+            }
+            else {
+                $("#modalCBody").html(data);
+            }
+            $(".modal-title").html("Współrzędne");
         }
     });
 }
