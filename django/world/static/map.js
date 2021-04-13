@@ -24,6 +24,7 @@ function send_data() {
     var json = JSON.stringify(featureGroup.toGeoJSON());
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+
     $('#coordinatesModal').modal('show');
     $.ajax({
         type: "POST",
@@ -43,7 +44,14 @@ function send_data() {
 }
 
 function display_hypsometric() {
-    var json = JSON.stringify(featureGroup.toGeoJSON());
+    var json_data = featureGroup.toGeoJSON();
+    if (document.getElementById('smooth').checked) {
+        json_data["smooth_color"] = 1;
+    } else {
+        json_data["smooth_color"] = 0;
+    }
+
+    var json_string = JSON.stringify(json_data);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     $('#waitModal').modal('show');
@@ -54,22 +62,22 @@ function display_hypsometric() {
             request.setRequestHeader("X-CSRFToken", csrftoken);
             request.setRequestHeader("Content-type", "application/json");
         },
-        data: json,
+        data: json_string,
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
             $('#waitModal').modal('hide');
 
             if (data === "No region selected") {
-                    $('#coordinatesModal').modal('show');
-                    $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
-                    $(".modal-title").html("Ostrzeżenie");
+                $('#coordinatesModal').modal('show');
+                $("#modalCBody").html("Najpierw zaznacz prostokąt na mapie.");
+                $(".modal-title").html("Ostrzeżenie");
             } else if (data === "Select only one region") {
-                    $('#coordinatesModal').modal('show');
-                    $("#modalCBody").html("Zaznacz tylko jeden obszar.");
-                    $(".modal-title").html("Ostrzeżenie");
+                $('#coordinatesModal').modal('show');
+                $("#modalCBody").html("Zaznacz tylko jeden obszar.");
+                $(".modal-title").html("Ostrzeżenie");
             } else {
-                    window.location.href = "/map/display_hypsometric/" + data;
+                window.location.href = "/map/display_hypsometric/" + data;
             }
         }
     });
