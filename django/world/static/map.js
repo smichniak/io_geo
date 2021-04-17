@@ -2,6 +2,44 @@ const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">Op
 const map = L.map('map').setView([50.2858, 20.78682], 5);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: attribution}).addTo(map);
 
+L.control.scale().addTo(map);
+
+const provider = new GeoSearch.EsriProvider();
+// const provider = new GeoSearch.OpenStreetMapProvider();
+
+const searchControl = new GeoSearch.GeoSearchControl({
+    provider: provider,
+    style: 'bar',
+    // howMarker: true, // optional: true|false  - default true
+    // showPopup: false, // optional: true|false  - default false
+    // marker: {
+    //     // optional: L.Marker    - default L.Icon.Default
+    //     icon: new L.Icon.Default(),
+    //     draggable: false,
+    // },
+    // popupFormat: ({query, result}) => result.label, // optional: function    - default returns result label,
+    // resultFormat: ({result}) => result.label, // optional: function    - default returns result label
+    // maxMarkers: 1, // optional: number      - default 1
+    // retainZoomLevel: false, // optional: true|false  - default false
+    // animateZoom: true, // optional: true|false  - default true
+    // autoClose: false, // optional: true|false  - default false
+    // searchLabel: 'Enter address', // optional: string      - default 'Enter address'
+    // keepResult: false, // optional: true|false  - default false
+    // updateMap: true, // optional: true|false  - default true
+});
+
+
+map.addControl(searchControl);
+
+map.on('click', function (e) {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
+});
+
 var featureGroup = L.featureGroup().addTo(map);
 
 var drawControl = new L.Control.Draw({
@@ -15,6 +53,7 @@ map.on('draw:created', function (e) {
     // Each time a feature is created, it's added to the over arching feature group
     featureGroup.addLayer(e.layer);
 });
+
 
 function clear_regions() {
     featureGroup.clearLayers();
@@ -40,8 +79,7 @@ function send_data() {
             // console.log(json);
             if (data === "No region selected") {
                 $("#modalCBody").html("Nie wybrano żadnego obszaru");
-            }
-            else {
+            } else {
                 $("#modalCBody").html(data);
             }
             $(".modal-title").html("Współrzędne");

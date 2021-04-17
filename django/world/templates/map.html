@@ -5,15 +5,18 @@
 <head>
     <title>Mapa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.5/dist/geosearch.css"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
 </head>
 
 <body>
-
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-between align-items-center"
      style="height: 8%; min-height: 50px;">
     <a class="navbar-brand" href="#">Mały Geograf</a>
@@ -34,7 +37,6 @@
     </div>
 </nav>
 
-
 <div class="d-flex" style="height: 92% !important;">
     <div class="flex-grow-0">
         <div class="m-2 btn-group-vertical">
@@ -43,14 +45,13 @@
             <button type="button" class="btn btn-success" onclick="display_3D()">Mapa 3D</button>
             -->
             <div><input id="smooth" name="smooth" type="checkbox"/> <label for="smooth">Ciągłe kolorowanie</label></div>
-            
+
         </div>
     </div>
     <div class="flex-grow-1 flex-fill">
         <div id="map"></div>
     </div>
 </div>
-
 
 <div class="modal fade" id="coordinatesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
@@ -82,7 +83,12 @@
         crossorigin="anonymous"></script>
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+<script src="https://unpkg.com/leaflet-geosearch@3.0.5/dist/geosearch.umd.js"></script>
+
 <script src="{% static 'map.js' %}"></script>
+
+
 
 </body>
 

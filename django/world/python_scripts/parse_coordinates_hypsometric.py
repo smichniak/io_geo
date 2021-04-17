@@ -25,7 +25,6 @@ def parse_coordinates_hypsometric(request):
     if not valid:
         return request_result
 
-    print(request_result)
     coordinates = request_result['features'][0]['geometry']['coordinates'][0]
     pk_of_the_image = gen_hypso_map(coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1],
                                     request_result['smooth_color'])
