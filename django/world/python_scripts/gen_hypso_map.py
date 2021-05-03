@@ -8,6 +8,8 @@ from .utility_fun import set_title
 from matplotlib import use
 import numpy as np
 from ..models import HypsometricImages
+from .gen_details_map import gen_details_map
+
 use('Agg')  # Fixes crashes on macOS
 
 
@@ -40,6 +42,8 @@ def get_levels(data_array, smooth_colouring):
 
 # E1/W1, N1/S1, E2/W2, N2/S2, 0/1 - steps/smooth
 def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring):
+    details_map = gen_details_map(longitude1, latitude1, longitude2, latitude2)
+
     data_array, hypso_map, hypso_map_database_url = get_dem_data(longitude1, latitude1,
                                                                  longitude2, latitude2)
     hypso_map += '.png'
@@ -55,6 +59,6 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
     plt.gca().set_aspect('equal', adjustable='box')
     plt.savefig(hypso_map)
 
-    saved_image = HypsometricImages.objects.create(image=hypso_map_database_url)
+    saved_image = HypsometricImages.objects.create(image=hypso_map_database_url, details_map=details_map)
 
     return saved_image.id
