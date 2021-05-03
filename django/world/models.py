@@ -16,3 +16,10 @@ class HypsometricImages(models.Model):
         verbose_name_plural = "HypsometricImages"
 
 
+class SurfaceImages(models.Model):
+    image = models.ImageField(blank=False, null=False, upload_to='uploaded_images')
+
+    class Meta:
+        verbose_name_plural = "SurfaceImages"
+
+
