@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from .models import HypsometricImages
+from .models import SurfaceImages
 
 from .python_scripts.parse_coordinates_hypsometric import check_valid_request
 from .python_scripts.gen_hypso_map import set_title
@@ -28,3 +29,10 @@ class HypsometricMapView(DetailView):
     context_object_name = 'hypso_map'
 
     template_name = "hypsometric_map.html"
+
+class MapView3D(DetailView):
+    model = SurfaceImages
+    queryset = SurfaceImages.objects.all()
+    context_object_name = 'map3d'
+
+    template_name = "map_3d.html"
