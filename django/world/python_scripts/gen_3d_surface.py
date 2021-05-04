@@ -117,9 +117,10 @@ def gen_3d_surface(longitude1, latitude1, longitude2, latitude2):
     max_points = 800000
     points = len(data_array) * len(data_array[0])
     div = round(points / max_points)
-    data_array = data_array[::div]
+    if div > 0:
+        data_array = data_array[::div]
 
-    title = set_title('Surface of ', longitude1, latitude1, longitude2, latitude2)
+    title = set_title('Surface of [', longitude1, latitude1, longitude2, latitude2)
 
     fig = go.Figure()
     fig.add_trace(go.Surface(z=data_array, colorscale=mycmap))
