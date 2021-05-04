@@ -27,7 +27,7 @@ def parse_coordinates_hypsometric(request):
 
     print(request_result)
     coordinates = request_result['features'][0]['geometry']['coordinates'][0]
-    pk_of_the_image = gen_hypso_map(coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1],
+    pk_of_the_image = gen_hypso_map(coordinates[0][0] - .05, coordinates[0][1] - .05, coordinates[2][0] + .05, coordinates[2][1]  + .05,
                                     request_result['smooth_color'])
 
     return HttpResponse(pk_of_the_image)

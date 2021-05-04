@@ -12,3 +12,4 @@ django/world/__pycache__/
 django/media/
 
 *.sqlite3
+/django/world/migrations/
