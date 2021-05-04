@@ -121,14 +121,17 @@ def gen_3d_surface(longitude1, latitude1, longitude2, latitude2):
         data_array = data_array[::div]
 
     title = set_title('Surface of [', longitude1, latitude1, longitude2, latitude2)
+    zrange = (0, max(int(data_array.max()), 2000))
+    lighting_effects = dict(ambient=0.4, diffuse=0.5, roughness=0.9, fresnel=0.2)
 
     fig = go.Figure()
-    fig.add_trace(go.Surface(z=data_array, colorscale=mycmap))
+    fig.add_trace(go.Surface(z=data_array, colorscale=mycmap, cmin=0,
+                             cmax=max(int(data_array.max()), 2000), lighting=lighting_effects))
     fig.update_layout(scene=dict(aspectratio=dict(x=2, y=2, z=0.75),
                                  xaxis=go.layout.scene.XAxis(title='', showticklabels=False),
                                  yaxis=go.layout.scene.YAxis(title='', showticklabels=False),
-                                 zaxis=go.layout.scene.ZAxis(title='height [m]')),
-                      title=title)
+                                 zaxis=go.layout.scene.ZAxis(title='height [m]', range=zrange)),
+                      title=title, autosize=True)
     fig.show()
     go_offline.plot(fig, filename=surface_filename, validate=True, auto_open=False)
     saved_file = SurfaceImages.objects.create(image=surface_database_url)
