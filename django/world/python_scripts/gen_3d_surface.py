@@ -119,7 +119,6 @@ def gen_3d_surface(longitude1, latitude1, longitude2, latitude2):
     div = round(points / max_points)
     if div > 0:
         data_array = data_array[::div]
-
     title = set_title('Surface of [', longitude1, latitude1, longitude2, latitude2)
     zrange = (0, max(int(data_array.max()), 2000))
     lighting_effects = dict(ambient=0.4, diffuse=0.5, roughness=0.9, fresnel=0.2)

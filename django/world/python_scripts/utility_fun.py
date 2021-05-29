@@ -28,7 +28,7 @@ def get_dem_data(longitude1: float, latitude1: float, longitude2: float, latitud
 
     filename.close()
 
-    return data_array, map_file, map_database_url
+    return np.flip(data_array, 0), map_file, map_database_url
 
 
 # Decimal coordinates up to 5 decimal places have accuracy of ~ 1 meter, that's enough
