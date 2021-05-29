@@ -9,8 +9,7 @@ def parse_coordinates_3D(request):
         return request_result
 
     coordinates = request_result['features'][0]['geometry']['coordinates'][0]
-    pk_of_the_image = gen_3d_surface(coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1])
-
-    # TODO 3D display needs to be done yet.
+    pk_of_the_image = gen_3d_surface(coordinates[0][0] - .05, coordinates[0][1] - .05,
+                                     coordinates[2][0] + .05, coordinates[2][1] + .05)
 
     return HttpResponse(pk_of_the_image)
