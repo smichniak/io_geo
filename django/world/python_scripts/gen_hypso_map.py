@@ -65,7 +65,9 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
     fig = plt.figure(figsize=(12, 8))
     ax = fig.add_subplot(111)
     ax.matshow(hillshade(data_array, 120, 30), cmap='Greys', alpha=.5, zorder=10)
-    cax = ax.contourf(data_array, cmap=topocmap, origin='image', levels=get_levels(data_array, smooth_colouring))
+    cax = ax.contourf(data_array, cmap=topocmap, origin='image',
+                      levels=get_levels(data_array, smooth_colouring), zorder=0)
+    ax.axis('off')
     fig.colorbar(cax, ax=ax)
     title_start = 'Hypsometric map of ['
     fig.suptitle(set_title(title_start, longitude1, latitude1, longitude2, latitude2))
