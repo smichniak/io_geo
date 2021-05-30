@@ -1,4 +1,6 @@
 {% load static %}
+{% load map_tags %}
+
 <!doctype html>
 <html lang="en">
 
@@ -84,9 +86,7 @@
 
 <script src="https://unpkg.com/leaflet-geosearch@3.0.5/dist/geosearch.umd.js"></script>
 
-<script src="{% static 'map.js' %}"></script>
-
-
+<script src="{% static 'map.js' %}?{% cache_bust %}"></script>
 
 </body>
 

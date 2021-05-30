@@ -121,7 +121,7 @@ function display_hypsometric() {
                 $("#modalCBody").html("Zaznacz tylko jeden obszar.");
                 $(".modal-title").html("Ostrzeżenie");
             } else {
-                window.location.href = "/map/display_hypsometric/" + data;
+                window.open("/map/display_hypsometric/" + data, '_blank');
             }
         }
     });
