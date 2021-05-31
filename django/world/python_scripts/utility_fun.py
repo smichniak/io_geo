@@ -7,7 +7,7 @@ import uuid
 
 
 def get_dem_data(longitude1: float, latitude1: float, longitude2: float, latitude2: float) -> (any, str, str):
-    filename = tempfile.NamedTemporaryFile(suffix='.tif')
+    filename = tempfile.NamedTemporaryFile(suffix='.TIF')
     unique_name = str(uuid.uuid4())
     map_file = 'media/uploaded_images/' + unique_name
     map_database_url = 'uploaded_images/' + unique_name

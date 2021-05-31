@@ -95,6 +95,19 @@ function display_hypsometric() {
         json_data["smooth_color"] = 0;
     }
 
+    if (document.getElementById('angle').value !== "") {
+        json_data["angle"] = parseInt(document.getElementById('angle').value);
+    }
+    else {
+        json_data["angle"] = 30;
+    }
+    if (document.getElementById('azimuth').value !== "") {
+        json_data["azimuth"] = parseInt(document.getElementById('azimuth').value);
+    }
+    else {
+        json_data["azimuth"] = 120;
+    }
+
     var json_string = JSON.stringify(json_data);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
@@ -120,7 +133,12 @@ function display_hypsometric() {
                 $('#coordinatesModal').modal('show');
                 $("#modalCBody").html("Zaznacz tylko jeden obszar.");
                 $(".modal-title").html("Ostrzeżenie");
-            } else {
+            } else if (data === "Wrong parameters") {
+                $('#coordinatesModal').modal('show');
+                $("#modalCBody").html("Niepoprawne parametry.");
+                $(".modal-title").html("Ostrzeżenie");
+            }
+            else {
                 window.open("/map/display_hypsometric/" + data, '_blank');
             }
         }
