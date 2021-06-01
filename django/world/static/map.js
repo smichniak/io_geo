@@ -99,13 +99,13 @@ function display_hypsometric() {
         json_data["angle"] = parseInt(document.getElementById('angle').value);
     }
     else {
-        json_data["angle"] = 30;
+        json_data["angle"] = 45;
     }
     if (document.getElementById('azimuth').value !== "") {
         json_data["azimuth"] = parseInt(document.getElementById('azimuth').value);
     }
     else {
-        json_data["azimuth"] = 120;
+        json_data["azimuth"] = 315;
     }
 
     var json_string = JSON.stringify(json_data);

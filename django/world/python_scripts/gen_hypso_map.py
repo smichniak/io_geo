@@ -69,7 +69,7 @@ def gen_hypso_map(longitude1, latitude1, longitude2, latitude2, smooth_colouring
                       levels=get_levels(data_array, smooth_colouring), zorder=0)
     ax.axis('off')
     fig.colorbar(cax, ax=ax)
-    title_start = 'Hypsometric map of ['
+    title_start = 'Cieniowana mapa hipsometryczna ['
     fig.suptitle(set_title(title_start, longitude1, latitude1, longitude2, latitude2))
     fig.gca().set_aspect('equal', adjustable='box')
     fig.savefig(hypso_map)
