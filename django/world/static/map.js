@@ -152,6 +152,8 @@ function display_3D() {
     } else {
         json_data["smooth_color"] = 0;
     }
+    json_data["azimuth"]  = 0;
+    json_data["angle"] = 0;
 
     var json_string = JSON.stringify(json_data);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
