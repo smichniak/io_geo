@@ -15,9 +15,8 @@ def check_valid_request(request):
         return HttpResponse('No region selected'), False
     elif len(json_data['features']) >= 2:
         return HttpResponse('Select only one region'), False
-    elif 'angle' in json_data and 'azimuth' in json_data and (
-            type(json_data['angle']) != int or type(json_data['azimuth']) != int or
-            not ((0 <= json_data['angle'] <= 90) and (0 <= json_data['azimuth'] <= 360))):
+    elif ('angle' in json_data and (type(json_data['angle']) != int or not 0 <= json_data['angle'] <= 90)) or (
+            'azimuth' in json_data and (type(json_data['azimuth']) != int or not 0 <= json_data['azimuth'] <= 360)):
         return HttpResponse('Wrong parameters'), False
 
     return json_data, True
