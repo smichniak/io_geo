@@ -30,6 +30,7 @@ class HypsometricMapView(DetailView):
 
     template_name = "hypsometric_map.html"
 
+
 class MapView3D(DetailView):
     model = SurfaceImages
     queryset = SurfaceImages.objects.all()

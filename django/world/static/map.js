@@ -152,8 +152,6 @@ function display_3D() {
     } else {
         json_data["smooth_color"] = 0;
     }
-    json_data["azimuth"]  = 0;
-    json_data["angle"] = 0;
 
     var json_string = JSON.stringify(json_data);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -182,7 +180,7 @@ function display_3D() {
                 $(".modal-title").html("Ostrzeżenie");
             } else {
                 // Na razie mapa 3D wyskakuje w nowej karcie.
-               // window.location.href = "/map/display_3d/" + data;
+                // window.location.href = "/map/display_3d/" + data;
             }
         }
     });

@@ -8,7 +8,6 @@ from .gen_hypso_map import gen_hypso_map
 # of HttpResponse, otherwise it returns request data in json form
 def check_valid_request(request):
     if not request.is_ajax():
-        # TODO Error?
         return HttpResponse('Wrong request'), False
 
     json_data = json.loads(str(request.body)[2:-1])
@@ -16,7 +15,9 @@ def check_valid_request(request):
         return HttpResponse('No region selected'), False
     elif len(json_data['features']) >= 2:
         return HttpResponse('Select only one region'), False
-    elif not ((0 <= json_data['angle'] <= 90) and (0 <= json_data['azimuth'] <= 360)):
+    elif 'angle' in json_data and 'azimuth' in json_data and (
+            type(json_data['angle']) != int or type(json_data['azimuth']) != int or
+            not ((0 <= json_data['angle'] <= 90) and (0 <= json_data['azimuth'] <= 360))):
         return HttpResponse('Wrong parameters'), False
 
     return json_data, True
