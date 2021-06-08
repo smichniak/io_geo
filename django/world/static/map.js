@@ -109,7 +109,7 @@ function display_hypsometric() {
     if (document.getElementById('azimuth').value !== "") {
         json_data["azimuth"] = parseInt(document.getElementById('azimuth').value);
     } else {
-        json_data["azimuth"] = 135;
+        json_data["azimuth"] = 315;
     }
 
     var json_string = JSON.stringify(json_data);

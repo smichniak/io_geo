@@ -49,7 +49,7 @@ def hillshade(array, azimuth, angle_altitude):
 
     shaded = np.sin(altituderad) * np.sin(slope) + np.cos(altituderad) * np.cos(slope) * np.cos(azimuthrad - aspect)
 
-    return 255 * (shaded + 1) / 2
+    return np.flip(255 * (shaded + 1) / 2, 0)
 
 
 # E1/W1, N1/S1, E2/W2, N2/S2, 0/1 - steps/smooth
