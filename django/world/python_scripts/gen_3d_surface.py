@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 import plotly.offline as go_offline
 import plotly.graph_objects as go
-from math import floor
 from .utility_fun import get_dem_data
 from .utility_fun import set_title
 from matplotlib import use
@@ -119,7 +117,7 @@ def gen_3d_surface(longitude1, latitude1, longitude2, latitude2):
     div = round(points / max_points)
     if div > 0:
         data_array = data_array[::div]
-    title = set_title('Surface of [', longitude1, latitude1, longitude2, latitude2)
+    title = set_title('Powierzchnia obszaru [', longitude1, latitude1, longitude2, latitude2)
     zrange = (0, max(int(data_array.max()), 2000))
     lighting_effects = dict(ambient=0.4, diffuse=0.5, roughness=0.9, fresnel=0.2)
 
@@ -129,9 +127,8 @@ def gen_3d_surface(longitude1, latitude1, longitude2, latitude2):
     fig.update_layout(scene=dict(aspectratio=dict(x=2, y=2, z=0.75),
                                  xaxis=go.layout.scene.XAxis(title='', showticklabels=False),
                                  yaxis=go.layout.scene.YAxis(title='', showticklabels=False),
-                                 zaxis=go.layout.scene.ZAxis(title='height [m]', range=zrange)),
+                                 zaxis=go.layout.scene.ZAxis(title='wysokość [m]', range=zrange)),
                       title=title, autosize=True)
-    fig.show()
     go_offline.plot(fig, filename=surface_filename, validate=True, auto_open=False)
     saved_file = SurfaceImages.objects.create(image=surface_database_url)
 

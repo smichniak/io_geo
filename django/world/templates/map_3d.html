@@ -1,19 +1,31 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mapa hipsometryczna</title>
+    <title>Mapa 3D</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
 
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-between align-items-center"
      style="height: 8%; min-height: 50px;">
-    <a href="{{ hypso_map.image.url }}" download>
+    <a href="{{ map3d.image.url }}" download>
         <button class="btn btn-outline-primary mr-3">Pobierz mapę</button>
     </a>
 </nav>
-<img src="{{ hypso_map.image.url }}" class="img-fluid" alt="Responsive image">
-<img src="{{ hypso_map.details_map.image_file.url }}" class="img-fluid" alt="Responsive image">
+
+
+<div id="mapDiv3D"></div>
+
+<script>
+    $(function () {
+        $("#mapDiv3D").load("{{ map3d.image.url }}");
+    });
+</script>
+
 </body>
 </html>

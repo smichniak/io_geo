@@ -35,18 +35,23 @@
 <div class="d-flex" style="height: 92% !important;">
     <div class="flex-grow-0">
         <div class="m-2 btn-group-vertical">
-            <button type="button" class="btn btn-primary" onclick="display_hypsometric()" id="hipso">Mapa hipsometryczna</button>
+            <button type="button" class="btn btn-primary" onclick="display_hypsometric()" id="hipso">Mapa
+                hipsometryczna
+            </button>
             <button type="button" class="btn btn-success" onclick="display_3D()" id="3d">Mapa 3D</button>
-            
+
             <div class="m-2">
-            <div><input id="smooth" name="smooth" type="checkbox"/> <label for="smooth">Ciągłe kolorowanie</label></div>
-            <br>
-            <div>
-                <label for="angle">Wysokość Słońca</label></div>
+                <div><input id="smooth" name="smooth" type="checkbox"/> <label for="smooth">Ciągłe kolorowanie</label>
+                </div>
+                <br>
+                Parametry cieniowania <br> mapy hipsometrycznej:
+                <br> <br>
+                <div>
+                    <label for="angle">Wysokość Słońca</label></div>
                 <input id="angle" name="angle" type="text" placeholder="0-90"/>
-            <br>
-            <div>
-                <label for="azimuth">Azymut</label></div>
+                <br>
+                <div>
+                    <label for="azimuth">Azymut</label></div>
                 <input id="azimuth" name="azimuth" type="text" placeholder="0-360"/>
             </div>
         </div>

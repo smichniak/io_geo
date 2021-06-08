@@ -76,13 +76,19 @@ function send_data() {
         dataType: "text",
         mode: 'same-origin',
         success: function (data) {
-            // console.log(json);
             if (data === "No region selected") {
                 $("#modalCBody").html("Nie wybrano żadnego obszaru");
+                $(".modal-title").html("Ostrzeżenie");
+                $('#coordinatesModal').modal('show');
+            } else if (data === "Select only one region") {
+                $('#coordinatesModal').modal('show');
+                $("#modalCBody").html("Zaznacz tylko jeden obszar.");
+                $(".modal-title").html("Ostrzeżenie");
             } else {
                 $("#modalCBody").html(data);
+                $(".modal-title").html("Współrzędne");
+                $('#coordinatesModal').modal('show');
             }
-            $(".modal-title").html("Współrzędne");
         }
     });
 }
@@ -97,15 +103,13 @@ function display_hypsometric() {
 
     if (document.getElementById('angle').value !== "") {
         json_data["angle"] = parseInt(document.getElementById('angle').value);
-    }
-    else {
+    } else {
         json_data["angle"] = 45;
     }
     if (document.getElementById('azimuth').value !== "") {
         json_data["azimuth"] = parseInt(document.getElementById('azimuth').value);
-    }
-    else {
-        json_data["azimuth"] = 315;
+    } else {
+        json_data["azimuth"] = 135;
     }
 
     var json_string = JSON.stringify(json_data);
@@ -137,8 +141,7 @@ function display_hypsometric() {
                 $('#coordinatesModal').modal('show');
                 $("#modalCBody").html("Niepoprawne parametry.");
                 $(".modal-title").html("Ostrzeżenie");
-            }
-            else {
+            } else {
                 window.open("/map/display_hypsometric/" + data, '_blank');
             }
         }
@@ -179,8 +182,7 @@ function display_3D() {
                 $("#modalCBody").html("Zaznacz tylko jeden obszar.");
                 $(".modal-title").html("Ostrzeżenie");
             } else {
-                // Na razie mapa 3D wyskakuje w nowej karcie.
-                // window.location.href = "/map/display_3d/" + data;
+                window.open("/map/display_3d/" + data, '_blank');
             }
         }
     });
